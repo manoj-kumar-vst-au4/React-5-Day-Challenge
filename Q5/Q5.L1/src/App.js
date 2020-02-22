@@ -1,22 +1,26 @@
 import React from 'react';
+import {connect} from "react-redux";
 
 class App extends React.Component{
-  state={
-    input:""
-  }
-
-  handleInput = (input) =>{
-    this.setState({
-      input:input
-    })
-  }
   render(){
     return(
-      <div className="container text-center shadow border border-dark rounded-lg bg-info py-2 mt-5">
-        <h2 classname=" ">HI there, i am created by Using command "create-react-app appName"</h2>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4 offset-md-4 text-center mt-5 border border-dark py-5 px-5 rounded bg-danger text-warning" >
+            {this.props.marvel.map(hero=>{
+              return(
+                <h3>{hero}</h3>
+              )
+            })}
+          </div>
+        </div>
       </div>
     )
   }
 }
-
-export default App;
+ const stateToProps = (state)=>{
+   return({
+     marvel:state.marvel
+   })
+ }
+export default connect(stateToProps)(App);
